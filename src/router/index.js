@@ -20,8 +20,16 @@ const routes = [
   }
 ]
 
-const router = new VueRouter({
-  routes
+export default new VueRouter({
+  mode: 'hash', // 禁用 history 模式（IE11 刷新 404）
+  base: process.env.BASE_URL,
+  routes,
+  // 修复 IE11 路由跳转卡顿
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })
-
-export default router
