@@ -1,48 +1,56 @@
-# Vue 2.x IE11 兼容项目
+# Vue2-IE 兼容项目
 
-## Project setup
+基于 Vue 2 + Element UI 的 IE11 兼容前端项目
+
+## 技术栈
+
+| 类别 | 技术 |
+|------|------|
+| 框架 | Vue 2.6.14 |
+| 路由 | Vue Router 3.5.1 |
+| UI | Element UI 2.15.14 |
+| 垫片 | core-js、regenerator-runtime、whatwg-fetch |
+
+## 快速开始
+
+```bash
+pnpm install
+pnpm run serve
+pnpm run build
 ```
-npm install
+
+## 兼容性实现
+
+### Polyfill 加载顺序 (main.js)
+
+```
+1. whatwg-fetch          → fetch API 兼容
+2. core-js/stable        → ES6+ 特性（主要 polyfill，覆盖 95%+）
+3. regenerator-runtime   → async/await
+4. ES_Polyfill           → 补充特性（87行）
 ```
 
-### Compiles and hot-reloads for development
+### ES_Polyfill 支持列表（仅 core-js 未覆盖的 IE11 原生缺失特性）
+
+| 类型 | 方法/特性 | 说明 |
+|------|----------|------|
+| Promise | withResolvers() | ES2024 新特性 |
+| String | replaceAll() | ES2021 新特性 |
+| Symbol | 完整实现 | IE11 不存在 |
+| Set | 完整实现 | IE11 不存在 |
+| Map | 完整实现 | IE11 不存在 |
+| WeakSet | 完整实现 | IE11 不存在 |
+| WeakMap | 完整实现 | IE11 不存在 |
+
+> 注：core-js 3.x 已覆盖大部分 ES6+ 特性（Object.assign、Array.includes、String.startsWith 等），仅以上特性未被覆盖。
+
+## 项目结构
+
 ```
-npm run serve
+src/
+├── main.js              // 入口：polyfill 顺序加载
+├── App.vue              // 根组件
+├── router/              // 路由配置
+└── utils/
+    └── ES_Polyfill.js   // 补充兼容（87行）
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## 核心依赖
-
-| 依赖 | 版本 | 说明 |
-|------|------|------|
-| vue | 2.6.14 | Vue.js 框架 |
-| vue-router | 3.5.1 | Vue 路由管理 |
-| core-js | 3.48.0 | JavaScript 标准库 polyfill |
-| regenerator-runtime | 0.14.1 | async/await polyfill |
-| whatwg-fetch | 3.6.20 | Fetch API polyfill |
-| css-vars-ponyfill | 2.4.9 | CSS 变量 polyfill |
-
-## IE11 兼容性说明
-
-本项目已针对 IE11 进行兼容处理，各依赖解决的问题：
-
-| 依赖 | 解决的问题 |
-|------|------------|
-| core-js | IE11 不支持 ES6+ 新特性（如 Promise、Array.from、Object.assign、Symbol 等），提供标准库 polyfill |
-| regenerator-runtime | IE11 不支持 async/await 语法，转换为生成器函数实现 |
-| whatwg-fetch | IE11 不支持 Fetch API，提供 XMLHttpRequest 封装的标准 fetch 接口 |
-| css-vars-ponyfill | IE11 不支持 CSS 自定义属性（:root { --color: red }），将 CSS 变量转换为静态值 |
-
-## 使用建议
-
-- **Promise**：直接使用，`core-js` 已自动注入
-- **async/await**：直接使用，`regenerator-runtime` 已转换
-- **fetch**：直接使用 `fetch()`，无需额外处理
-- **CSS 变量**：正常书写，插件会自动处理兼容

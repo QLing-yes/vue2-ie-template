@@ -32,14 +32,7 @@ module.exports = defineConfig({
       ? 'js/[name].[contenthash:8].js' 
       : 'js/[name].js');
 
-    // 增加 IE11 兼容的 loader（处理 CSS 中的现代语法）
-    config.module.rule('css')
-      .test(/\.css$/)
-      .use('css-loader')
-      .tap(options => ({
-        ...options,
-        esModule: false // 禁用 ES 模块，IE11 无法解析
-      }));
+
   },
   // 6. devServer 兼容 IE11（开发环境）
   devServer: {
