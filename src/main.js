@@ -15,22 +15,21 @@ import 'regenerator-runtime/runtime';
 // 4. 加载自定义 Polyfill，进一步增强 IE 兼容性
 import './utils/ES_Polyfill';
 
-// 5. 加载 Vue 核心库
-import Vue from 'vue';
-
-// 6. 加载 Element UI 组件库及其样式
-import ElementUI from 'element-ui';
+// 5. 加载 Element UI 样式
 import 'element-ui/lib/theme-chalk/index.css';
 
-// 7. 加载根组件和路由配置
+// 6. 加载 Vue 核心库
+import Vue from 'vue';
+
+// 7. 注册 Element UI（异步自动注册）
+import './plugins/element';
+
+// 8. 加载根组件和路由配置
 import App from './App.vue';
 import router from './router';
 
 // 关闭生产环境提示
 Vue.config.productionTip = false;
-
-// 使用 Element UI 组件库
-Vue.use(ElementUI);
 
 /**
  * 初始化 Vue 实例
