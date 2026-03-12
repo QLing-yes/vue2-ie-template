@@ -1,4 +1,4 @@
-![alt text](image.png)
+![alt text](https://p9-xtjj-sign.byteimg.com/tos-cn-i-73owjymdk6/e32dfa9dc71844689016a8cb48ff04c0~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgcWxpbmc=:q75.awebp?rk3s=f64ab15b&x-expires=1773889199&x-signature=i4f0BCftx%2F1ThazhLht5jVcqf4U%3D)
 
 # Vue2-IE 兼容项目
 
@@ -29,7 +29,7 @@ pnpm run build
 1. whatwg-fetch          → fetch API 兼容
 2. core-js/stable        → ES6+ 特性（主要 polyfill，覆盖 95%+）
 3. regenerator-runtime   → async/await
-4. ES_Polyfill           → 补充特性（87行）
+4. ES_Polyfill           → 补充特性
 ```
 
 ### ES_Polyfill 支持列表（仅 core-js 未覆盖的 IE11 原生缺失特性）

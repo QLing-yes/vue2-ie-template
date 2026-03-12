@@ -9,6 +9,7 @@
   "description": "Vue 2 project with IE browser compatibility support",
   "keywords": [
     "vue2",
+    "ie",
     "ie-compatible",
     "element-ui"
   ],
@@ -16,7 +17,8 @@
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "open-ie": "start iexplore"
   },
   "dependencies": {
     "core-js": "3.48.0",

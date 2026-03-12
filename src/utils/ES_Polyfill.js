@@ -1,6 +1,6 @@
 /**
- * ES标准库 Polyfill - 增强 IE11 兼容性
- * 仅包含 core-js 完全未覆盖的 IE11 原生缺失特性
+ * ES标准库 Polyfill - 增强兼容性
+ * 仅包含 core-js 完全未覆盖的
  */
 (function (global) {
   /** @type {typeof Array.prototype} */
