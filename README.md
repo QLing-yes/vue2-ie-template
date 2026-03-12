@@ -1,3 +1,5 @@
+![alt text](image.png)
+
 # Vue2-IE 兼容项目
 
 基于 Vue 2 + Element UI 的 IE11 兼容前端项目
@@ -8,7 +10,7 @@
 |------|------|
 | 框架 | Vue 2.6.14 |
 | 路由 | Vue Router 3.5.1 |
-| UI | Element UI 2.15.14（按需导入 + 全局注册） |
+| UI | Element UI 2.15.14 |
 | 垫片 | core-js、regenerator-runtime、whatwg-fetch |
 
 ## 快速开始
@@ -30,35 +32,27 @@ pnpm run build
 4. ES_Polyfill           → 补充特性（87行）
 ```
 
-### Element UI 使用方式
+### ES_Polyfill 支持列表（仅 core-js 未覆盖的 IE11 原生缺失特性）
 
-**方式一：全局注册（推荐常用组件）**
-```js
-// main.js 已自动全局注册常用组件
-<el-button>按钮</el-button>
-<el-input>输入框</el-input>
-<el-table :data="tableData">...</el-table>
-```
+| 类型 | 方法/特性 | 说明 |
+|------|----------|------|
+| Promise | withResolvers() | ES2024 新特性 |
+| String | replaceAll() | ES2021 新特性 |
+| Symbol | 完整实现 | IE11 不存在 |
+| Set | 完整实现 | IE11 不存在 |
+| Map | 完整实现 | IE11 不存在 |
+| WeakSet | 完整实现 | IE11 不存在 |
+| WeakMap | 完整实现 | IE11 不存在 |
 
-**方式二：按需导入（不常用的组件）**
-```js
-import { DatePicker } from 'element-ui';
-export default {
-  components: { DatePicker }
-}
-```
-
-> babel-plugin-component 会自动处理按需导入的样式
+> 注：core-js 3.x 已覆盖大部分 ES6+ 特性（Object.assign、Array.includes、String.startsWith 等），仅以上特性未被覆盖。
 
 ## 项目结构
 
 ```
 src/
-├── main.js                    // 入口
-├── App.vue                    // 根组件
-├── router/                    // 路由配置
-├── plugins/
-│   └── element.js             // Element UI 集中注册
+├── main.js              // 入口：polyfill 顺序加载
+├── App.vue              // 根组件
+├── router/              // 路由配置
 └── utils/
-    └── ES_Polyfill.js         // 补充兼容（87行）
+    └── ES_Polyfill.js   // 补充兼容（87行）
 ```
