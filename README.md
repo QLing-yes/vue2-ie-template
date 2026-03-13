@@ -56,3 +56,14 @@ src/
 └── utils/
     └── ES_Polyfill.js   // 补充兼容（87行）
 ```
+
+## 补充 polyfill CDN
+```
+// ES6 语言特性
+https://cdn.jsdelivr.net/npm/core-js-bundle@3.48.0/minified.js
+// fetch API
+https://cdn.jsdelivr.net/npm/whatwg-fetch@3.6.20/dist/fetch.umd.min.js
+// ------- 或 ----------
+// 按 User-Agent 智能返回 polyfill
+https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=Promise,fetch,Object.assign,Array.prototype.find,Array.prototype.findIndex
+```
